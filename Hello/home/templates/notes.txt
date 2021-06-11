@@ -1,0 +1,40 @@
+    formor=Register_org()
+    if request.method=='POST':
+        hashed_pw=bcrypt.generate_password_hash(formor.passw.data).decode('utf-8')
+        user1=User_org(orgname=formor.orgname.data,hod=formor.hod.data,oemail=formor.official_email.data,contact=formor.contact.data,branch=formor.branch.data,passw=hashed_pw)
+        
+        existingUser=User_org.query.filter_by(contact=formor.contact.data).first()
+
+        if existingUser==None:
+            db.session.add(user1)
+            db.session.commit()
+            flash("Welcome","success")
+            return redirect(url_for("home"))
+        
+        else:
+            flash("Sorry user already exits!!")
+            return redirect(url_for('login'))
+        
+    return render_template("register_org.html",form=formor,title="SIGN UP AS ORGANISATION")
+
+
+
+
+       background: linear-gradient(to bottom, #ffffff 37%, #4a4545 100%);
+       
+       background: linear-gradient(to top left, #ffffff 48%, #4a4545 100%);
+
+       <!--background: linear-gradient(to bottom, #ffffff 48%, #4a4545 100%);-->
+
+       <div class="row">
+           <div class="col-25">
+            {{form.area.label}}
+           </div>
+           <div class="col-75">
+             <select id="country" name="country">
+               <option value="australia">1 day</option>
+               <option value="canada">More than 2 days</option>
+              
+             </select>
+           </div>
+         </div>
