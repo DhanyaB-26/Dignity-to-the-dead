@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block content %}
+    <br><br><br>
+    <h1>RESETING PASSWORD</h1>
+    <p>Please enter your registered email to recieve the email to reset password</p>
+    <form action="" method="POST">
+        <fieldset>
+            <p>
+                {{form.email.label}}<br>
+                {{form.email(size=100)}}
+            </p>
+            <p>
+                {{form.submit}}
+            </p>
+        </fieldset>
+    </form>
+{% endblock content %}
